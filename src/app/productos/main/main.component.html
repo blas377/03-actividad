@@ -1,0 +1,20 @@
+<div class="bg-info bg-gradient bg-opacity-25 m-4 border rounded-3">
+    <div class="d-flex justify-content-evenly bg-primary bg-gradient m-4 text-light">
+        <h1>{{ productos.length }} PRODUCTOS</h1>
+         <h1>FORMULARIO</h1>
+    </div>
+
+    <div class="d-flex justify-content-evenly m-5">
+        <div>
+            <app-listado [productos]="productos"></app-listado>
+        </div>
+
+        <div>
+            <app-formulario (elementoEnviar)="agrega($event)"></app-formulario>
+        </div>
+    </div>
+
+    <div class="d-flex justify-content-center">
+        <i>Blas Rueda ©</i>
+    </div>
+</div>

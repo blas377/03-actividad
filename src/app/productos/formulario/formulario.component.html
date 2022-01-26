@@ -1,0 +1,7 @@
+<form (ngSubmit)="agrega()">
+    <input class="m-1" type="text" name="nombre" placeholder="Nombre:" [(ngModel)]="nuevoProducto.nombre" />
+    <br>
+    <input class="m-1" type="number" name="precio" placeholder="Precio:" [(ngModel)]="nuevoProducto.precio" />
+    <br>
+    <button class="btn btn-primary m-2">Enviar</button>
+</form>

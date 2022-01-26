@@ -1,0 +1,9 @@
+<ul *ngIf=" productos.length > 0 || 'Vacío'">
+    <li *ngFor="let item of productos">{{ item.nombre }} - {{ item.precio }}€ </li>
+</ul>
+
+<form (ngSubmit)="elimina()">
+    <input class="m-1" type="text" name="borrar" placeholder="Nombre:" [(ngModel)]="borrado.nombre" />
+    <br>
+    <button class="btn btn-primary m-2">Borrar</button>
+</form>
