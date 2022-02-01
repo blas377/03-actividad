@@ -1,9 +1,9 @@
+<strong class="list-unstyled p-1">Nombre - Edad - Profesión</strong>
 <ul *ngIf=" listaUsuarios.length > 0 || 'Vacío'">
-    <li *ngFor="let item of listaUsuarios">{{ item.nombre | titlecase }} - {{ item.edad }} </li>
+    <li *ngFor="let item of listaUsuarios" class="p-1">{{ item.nombre | titlecase }} - {{ item.edad }} años - {{ item.profesion || 'sin especificar'}}</li>
 </ul>
 
 <form (ngSubmit)="elimina()">
     <input class="m-1" type="text" name="borrar" placeholder="Nombre:" [(ngModel)]="usuarioEliminado.nombre" />
-    <br>
     <button class="btn btn-primary m-2">Borrar</button>
 </form>
