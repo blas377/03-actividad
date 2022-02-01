@@ -3,20 +3,25 @@ import { CommonModule } from '@angular/common';
 import { ListadoComponent } from './listado/listado.component';
 import { FormsModule } from '@angular/forms';
 import { FormularioComponent } from './formulario/formulario.component';
-import { MainComponentProductos } from './main/main.component';
+import { MainComponentUsuarios } from './main/main.component';
+import { UsuariosService } from './services/usuarios.service';
+
 @NgModule({
   declarations: [
-    MainComponentProductos,
+    MainComponentUsuarios,
     ListadoComponent,
     FormularioComponent
   ],
   exports: [
-    MainComponentProductos
+    MainComponentUsuarios
   ],
   imports: [
     CommonModule,
     FormsModule
+  ],
+  providers: [
+    UsuariosService
   ]
 })
 
-export class ProductosModule { }
+export class UsuariosModule { }

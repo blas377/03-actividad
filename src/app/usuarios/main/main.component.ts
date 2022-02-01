@@ -1,11 +1,22 @@
 import { Component } from '@angular/core';
-import { Productos } from '../interface.productos';
+import { Productos, Usuarios } from '../interface.usuarios';
+import { UsuariosService } from '../services/usuarios.service';
+
 @Component({
-  selector: 'app-main-productos',
+  selector: 'app-main-usuarios',
   templateUrl: './main.component.html'
 })
 
-export class MainComponentProductos{
+export class MainComponentUsuarios{
+  listaUsuarios:Usuarios[]=[];
+  nuevoUsuario:Usuarios;
+  usuarioEliminado:Usuarios;
+
+  constructor(private varServicio:UsuariosService){
+    this.listaUsuarios = varServicio.obtenerListaUsuarios;
+    this.nuevoUsuario = varServicio.obtenerNuevoUsuario;
+    this.usuarioEliminado = varServicio.obtenerUsuarioEliminado;
+  }
 
   productos: Productos[] = [
     {
