@@ -1,5 +1,6 @@
-import { Component, Output, EventEmitter } from '@angular/core';
-import { Productos } from '../interface.usuarios';
+import { Component } from '@angular/core';
+import { Usuarios } from '../interface.usuarios';
+import { UsuariosService } from '../services/usuarios.service';
 
 @Component({
   selector: 'app-formulario',
@@ -7,29 +8,15 @@ import { Productos } from '../interface.usuarios';
 })
 export class FormularioComponent {
 
-  @Output() elementoEnviar:EventEmitter<Productos> = new EventEmitter();
+  constructor(private varServicio: UsuariosService) {
+    this.nuevoUsuario = this.varServicio.obtenerNuevoUsuario;
+  }
 
-  nuevoProducto:Productos = {
-    nombre: '',
-    precio: 0
-  };
+  nuevoUsuario: Usuarios;
 
-    /**
-     * Método para agregar un objeto solicitado al array de productos
-     */
-    agrega() {
-      // Si no está vacío el nombre del producto se procede a crearlo
-      if (this.nuevoProducto.nombre !== '') {
-  
-        // Se añade el objeto al array de objetos
-        this.elementoEnviar.emit(this.nuevoProducto);
-
-        // Reinicia el objeto para vaciarlo
-        this.nuevoProducto = {
-          nombre: '',
-          precio: 0
-        };
-      }
-    }
+  agrega() {        
+    this.varServicio.agregarUsuario(this.nuevoUsuario);
+    this.nuevoUsuario = this.varServicio.obtenerNuevoUsuario;
+  }
 
 }

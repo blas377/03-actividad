@@ -4,25 +4,22 @@ import { Usuarios } from '../interface.usuarios';
 @Injectable({
   providedIn: 'root'
 })
-export class UsuariosService {
 
-  constructor() {
-    console.log("Servicios");
-  }
+export class UsuariosService {
 
   private _listaUsuarios: Usuarios[] = [
     {
-      nombre: 'Blas',
+      nombre: 'blas',
       edad: 24,
       profesion: 'desarrollador'
     },
     {
-      nombre: 'David',
+      nombre: 'david',
       edad: 25,
       profesion: 'back-end'
     },
     {
-      nombre: 'Rueda',
+      nombre: 'rueda',
       edad: 26,
       profesion: 'front-end'
     },
@@ -39,7 +36,7 @@ export class UsuariosService {
   }
 
   get obtenerListaUsuarios(): Usuarios[] {
-    return [...this._listaUsuarios];
+    return this._listaUsuarios;
   }
 
   get obtenerNuevoUsuario(): Usuarios {
@@ -50,16 +47,32 @@ export class UsuariosService {
     return this._usuarioEliminado;
   }
 
-  agregarUsuario() {
-    if(this._nuevoUsuario.nombre.trim().length > 0)
-    this._nuevoUsuario.nombre = this._nuevoUsuario.nombre.trim().toLocaleLowerCase();
-    // this._nuevoUsuario.profesion = this._nuevoUsuario.profesion.trim().toLocaleLowerCase();
-    this._listaUsuarios.push(this._nuevoUsuario);
+  agregarUsuario(dato:Usuarios) {
+    if(dato.nombre.trim().length > 0){
+      let flag:Boolean = true;
+      dato.nombre = dato.nombre.toLocaleLowerCase();
+
+      this._listaUsuarios.forEach(e => {
+        if (e.nombre.toLocaleLowerCase() === dato.nombre.toLocaleLowerCase()) {        
+          flag = false;
+        }
+      })
+
+      if (flag){
+        this._listaUsuarios.push(dato);
+      }
+    }
+
+    this._nuevoUsuario = {
+      nombre: '',
+      edad: 0
+    }
+    
   }
 
-  eliminaUsuario() {
+  eliminaUsuario(dato:Usuarios) {    
     this._listaUsuarios.forEach(e => {
-      if (e.nombre === this._usuarioEliminado.nombre) {
+      if (e.nombre.toLocaleLowerCase() === dato.nombre.toLocaleLowerCase()) {        
         this._listaUsuarios.splice(this._listaUsuarios.indexOf(e), 1);
       }
     })
@@ -69,4 +82,6 @@ export class UsuariosService {
       edad: 0
     }
   }
+
+  constructor() {}
 }

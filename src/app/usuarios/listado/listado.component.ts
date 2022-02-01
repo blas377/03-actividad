@@ -1,5 +1,6 @@
-import { Component, Input } from '@angular/core';
-import { Productos } from '../interface.usuarios';
+import { Component } from '@angular/core';
+import { Usuarios } from '../interface.usuarios';
+import { UsuariosService } from '../services/usuarios.service';
 
 @Component({
   selector: 'app-listado',
@@ -8,28 +9,17 @@ import { Productos } from '../interface.usuarios';
 
 export class ListadoComponent {
 
-  @Input() productos:Productos[] = [];
-
-  borrado: Productos = {
-    nombre: '',
-    precio: 0
-  };
-
-  /**
-   * Método que elimina el objeto solicitado
-   */
-  elimina() {
-    // Recorre el array de objetos y obtiene su indice para posteriormente eliminar el objeto solicitado
-    this.productos.forEach(e => {
-      if (e.nombre === this.borrado.nombre) {
-        this.productos.splice(this.productos.indexOf(e), 1);
-      }
-    });
-
-    // Reinicia el objeto para vaciarlo
-    this.borrado = {
-      nombre: '',
-      precio: 0
-    };
+  constructor(private varServicio: UsuariosService) {
+    this.usuarioEliminado = this.varServicio.obtenerUsuarioEliminado;
+    this.listaUsuarios = this.varServicio.obtenerListaUsuarios;
   }
+
+  listaUsuarios: Usuarios[];
+  usuarioEliminado: Usuarios;
+
+  elimina() {    
+    this.varServicio.eliminaUsuario(this.usuarioEliminado);
+    this.usuarioEliminado = this.varServicio.obtenerUsuarioEliminado;
+  }
+  
 }
